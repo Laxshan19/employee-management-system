@@ -1,12 +1,11 @@
 import express from "express";
-import db from "./utils/db.js";
 import cors from 'cors';
-import { AdminRouter } from "./Routes/AdminRoute.js";
+import { adminRouter } from "./Routes/AdminRoute.js";
 
 const app=express();
 app.use(cors());
-app.use(express.json);
-app.use('/auth',AdminRouter);
+app.use(express.json());
+app.use('/auth',adminRouter);
 
 
 app.listen(3000,()=>{
