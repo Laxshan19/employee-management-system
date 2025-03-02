@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './style.css';
+import {useNavigate} from 'react-router-dom';
 
 
 const Login = () => {
@@ -9,11 +10,15 @@ const Login = () => {
         password: '',
     });
 
+const navigate=useNavigate();
+
     const handleSubmit = (event) => {
         event.preventDefault(); 
 
         axios.post('http://localhost:3000/auth/adminlogin', values)
-        .then(result => console.log("Response:", result))
+        .then(result => {
+            navigate('/dashboard');
+        })
         .catch(err => console.log("Error:", err));
     };
 
