@@ -87,6 +87,6 @@ export const getCategories = (req, res) => {
     if (error) {
       return res.status(500).json({ success: false, error: "Server error: " + error });
     }
-    return res.status(200).json({ success: true, data: result });
+    return res.status(200).json({ success: true,  result });
   });
 };
