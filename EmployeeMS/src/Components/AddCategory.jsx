@@ -16,6 +16,7 @@ const AddCategory = () => {
         .then((result) => {
           console.log(result);
           if (result.data.success) {
+            setCategory('');
             navigate("/dashboard/add_category");
           } else {
             console.log(result.data.error);
@@ -30,7 +31,7 @@ const AddCategory = () => {
         <form onSubmit={handleSubmit}>
             <div className='mb-3'>
                 <label htmlFor="category"><strong>Category:</strong></label>
-                <input type="text" onChange={(e)=>setCategory(e.target.value)} name='category' placeholder='Enter Category'  className='form-control rounded-0'/>
+                <input type="text" onChange={(e)=>setCategory(e.target.value)} name='category' value={category} placeholder='Enter Category'  className='form-control rounded-0'/>
             </div>
             <button className='btn btn-success w-100 rounded-0 mb-2' type='submit'>Add Category</button>
         </form>
