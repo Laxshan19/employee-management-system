@@ -3,6 +3,24 @@ import bcrypt from 'bcrypt';
 import multer from "multer";
 import path from "path";
 
+
+//image Upload
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, 'Public/Images')
+  },
+  filename: (req, file, cb) => {
+      cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
+  }
+})
+
+export const upload = multer({
+  storage: storage
+})
+// end imag eupload 
+
+
+
 export const addEmployee=(req,res)=>{
     
     const sql='INSERT INTO employee(name,email,password,address,salary,image,category_id) VALUES (?) ';
@@ -14,7 +32,7 @@ export const addEmployee=(req,res)=>{
                 hash,
                 req.body.address,
                 req.body.salary,
-                req.body.image,
+                req.file.filename,
                 req.body.category_id
                  ]
 
