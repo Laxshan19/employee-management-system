@@ -24,7 +24,7 @@ const Dashboard = () => {
                 </li>
                 <li>
                   <Link to="/dashboard/category" className="nav-link px-0 align-middle text-white">
-                    <i className="fs-4 bi-people"></i> <span className="ms-1 d-none d-sm-inline">Category</span> </Link>
+                  <i className="fs-4 bi-columns ms-2"></i> <span className="ms-1 d-none d-sm-inline">Category</span> </Link>
                 </li>
                 <li>
                   <Link to="/dashboard/profile" className="nav-link px-0 align-middle text-white">

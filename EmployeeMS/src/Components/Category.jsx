@@ -3,23 +3,23 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Category = () => {
-    const [category, setCategory] = useState([]); // ✅ Ensure category is initialized as an array
+    const [category, setCategory] = useState([]); // Ensure category is initialized as an array
 
     useEffect(() => {
         axios.get('http://localhost:3000/auth/get_category')
             .then((result) => {
-                console.log("API Response:", result); // Debugging
-    
-                if (result.data && result.data.data) { // ✅ Access "data" instead of "result"
-                    setCategory(result.data.data);  
+                setCategory([]);
+                console.log("API Response:", result.date); // Debugging
+                if (result.data && result.data.result) { // Access "data" instead of "result"
+                    setCategory(result.data.result);  
                 } else {
-                    setCategory([]); // ✅ If API response is incorrect, set an empty array
+                    setCategory([]); // if API response is incorrect, set an empty array
                     console.error("Unexpected API response:", result.data);
                 }
             })
             .catch(error => {
                 console.error("Error fetching categories:", error);
-                setCategory([]); // ✅ Handle API errors properly
+                setCategory([]); //  Handle API errors properly
             });
     }, []);
     

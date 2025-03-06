@@ -9,10 +9,10 @@ const AddCategory = () => {
     const navigate = useNavigate(); 
 
     const handleSubmit = (e) => {
-      e.preventDefault(); // Fix: Corrected typo
+      e.preventDefault(); 
   
       axios
-        .post("http://localhost:3000/auth/add_category", { name: category }) // Fix: Send as an object
+        .post("http://localhost:3000/auth/add_category", { name: category }) 
         .then((result) => {
           console.log(result);
           if (result.data.success) {
