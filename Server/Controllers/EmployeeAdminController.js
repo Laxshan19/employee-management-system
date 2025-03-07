@@ -60,9 +60,6 @@ const validateEmployeeData = (employeeData) => {
   if (!employeeData.category_id) {
     errors.category_id = "Category is required.";
   }
-
-  
-
   return errors;
 };
 
@@ -109,3 +106,37 @@ export const addEmployee=(req,res)=>{
       return res.status(200).json({ success: true,  result });
     });
   };
+
+
+export const getEmployeeById=(req,res)=>{
+  const id=req.params.id;
+  const sql="SELECT * FROM employee WHERE id=?";
+  con.query(sql,[id],(err,result)=>{
+    if(err){
+      res.status(500).json({message:"server error"+err})
+    }else{
+      return res.status(200).json(result);
+    }
+  })
+}
+
+export const editEmployee=(req,res)=>{
+  const id=req.params.id;
+  // Check if a new image is uploaded
+  const imageFilename = req.file ? req.file.filename : req.body.existingImage;
+
+  const sql="UPDATE employee SET name=?,email=?,salary=?,address=?,category_id=?,image=? WHERE id=?";
+  const values=[
+    req.body.name,
+    req.body.email,
+    req.body.address,
+    req.body.salary,
+     imageFilename, // Use new file if uploaded, otherwise keep the old one
+    req.body.category_id,
+    id,
+  ]
+  con.query(sql,values,(err,result)=>{
+    if(err) res.json({message:"server Error"+err})
+    return res.json({success:"updated successfully!"});
+})
+}
