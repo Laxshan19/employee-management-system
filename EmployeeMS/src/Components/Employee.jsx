@@ -50,11 +50,22 @@ const Employee = () => {
               employee.map((e, index) => (
                 <tr key={index}>
                   <td>{e.name}</td>
-                  <td></td>
+                  <td>
+                  <img
+                    src={`http://localhost:3000/Images/` + e.image}
+                    className="employee_image"
+                  />
+                  </td>
                   <td>{e.email}</td>
                   <td>{e.address}</td>
                   <td>{e.salary}</td>
                   <td>
+                  <Link
+                    to={`/dashboard/edit_employee/` + e.id}
+                    className="btn btn-info btn-sm me-2"
+                  >
+                    Edit
+                  </Link>
                   <button
                     className="btn btn-warning btn-sm"
                     onClick={() => handleDelete(e.id)}
