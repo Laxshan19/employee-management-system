@@ -1,5 +1,6 @@
 import con from "../utils/db.js";
 import bcrypt from 'bcrypt';
+import { error } from "console";
 import multer from "multer";
 import path from "path";
 
@@ -19,10 +20,8 @@ export const upload = multer({
 })
 // end imag eupload 
 
-
-//validation
-// Validation Function
-const validateEmployeeData = (employeeData) => {
+//Add Validation Function
+const addValidateEmployeeData = (employeeData) => {
   const errors = {};
 
   // Name Validation
@@ -63,11 +62,46 @@ const validateEmployeeData = (employeeData) => {
   return errors;
 };
 
+//Add Validation Function
+const editValidateEmployeeData = (employeeData) => {
+  const errors = {};
+
+  // Name Validation
+  if (!employeeData.name || employeeData.name.trim() === "") {
+    errors.name = "Name is required.";
+  }
+
+  // Email Validation
+  if (!employeeData.email || employeeData.email.trim() === "") {
+    errors.email = "Email is required.";
+  } else if (!/\S+@\S+\.\S+/.test(employeeData.email)) {
+    errors.email = "Invalid email format.";
+  }
+
+  // Salary Validation
+  if (!employeeData.salary || employeeData.salary.trim() === "") {
+    errors.salary = "Salary is required.";
+  } else if (isNaN(employeeData.salary) || parseFloat(employeeData.salary) <= 0) {
+    errors.salary = "Salary must be a positive number.";
+  }
+
+  // Address Validation
+  if (!employeeData.address || employeeData.address.trim() === "") {
+    errors.address = "Address is required.";
+  }
+
+  // Category Validation
+  if (!employeeData.category_id) {
+    errors.category_id = "Category is required.";
+  }
+  return errors;
+};
+
 
 
 export const addEmployee=(req,res)=>{
 
-  const errors=validateEmployeeData(req.body);
+  const errors=addValidateEmployeeData(req.body);
     // Check if there are validation errors
   if (Object.keys(errors).length > 0) {
     return res.status(400).json({ status: false, errors });
@@ -121,6 +155,12 @@ export const getEmployeeById=(req,res)=>{
 }
 
 export const editEmployee=(req,res)=>{
+  const errors=editValidateEmployeeData(req.body);
+    // Check if there are validation errors
+  if (Object.keys(errors).length > 0) {
+    return res.status(400).json({ status: false, errors });
+  }
+
   const id=req.params.id;
   // Check if a new image is uploaded
   const imageFilename = req.file ? req.file.filename : req.body.existingImage;
@@ -139,4 +179,15 @@ export const editEmployee=(req,res)=>{
     if(err) res.json({message:"server Error"+err})
     return res.json({success:"updated successfully!"});
 })
+}
+
+
+export const deleteEmployee=(req,res)=>{
+  const id=req.params.id;
+  const sql="DELETE FROM employee WHERE id=(?)";
+  con.query(sql,[id],(error,result)=>{
+    if(error) return res.status(500).json({status:false,message:"query error"+error})
+    if(result.affectedRows===0) return res.status(404).json({status:false,message:"Employee not found"})
+    return res.status(200).json({status:true,message:"deleted sucessfully!"})
+  })
 }

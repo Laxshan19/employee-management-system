@@ -1,6 +1,6 @@
 import express from "express";
 import { adminLogin,addCategory,getCategories } from "../Controllers/AdminController.js";
-import { addEmployee,editEmployee,getEmployee, getEmployeeById, upload } from "../Controllers/EmployeeAdminController.js";
+import { addEmployee,editEmployee,getEmployee, getEmployeeById, upload,deleteEmployee } from "../Controllers/EmployeeAdminController.js";
 
 const router=express.Router();
 
@@ -12,6 +12,8 @@ router.post('/addemployee',upload.single('image'),addEmployee);
 router.get('/get_employee',getEmployee);
 router.get('/get_employee/:id',getEmployeeById);
 router.put('/edit_employee/:id',upload.single('image'),editEmployee);
+router.get('/delete_employee/:id',deleteEmployee);
+
 
 
 
