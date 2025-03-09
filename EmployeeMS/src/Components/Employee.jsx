@@ -15,6 +15,16 @@ const Employee = () => {
       console.error("Error fetching categories:",error);
      })
   },[])
+
+  const handleDelete=(id)=>{
+   axios.get(`http://localhost:3000/auth/delete_employee/${id}`)
+   .then((result)=>{
+        console.log(result.data);
+        setEmployee(employee.filter((emp) => emp.id !== id)); //  Remove deleted employee
+   })
+   .catch((error)=>{console.error(error)})
+  }
+
   return (
     <div className="px-5 mt-3">
       <div className="d-flex justify-content-center">
@@ -45,6 +55,11 @@ const Employee = () => {
                   <td>{e.address}</td>
                   <td>{e.salary}</td>
                   <td>
+                  <button
+                    className="btn btn-warning btn-sm"
+                    onClick={() => handleDelete(e.id)}
+                  > Delete
+                  </button>
                   </td>
                 </tr>
               ))
