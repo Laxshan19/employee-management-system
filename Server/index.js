@@ -4,6 +4,8 @@ import { adminRouter } from "./Routes/AdminRoute.js";
 
 const app = express();
 
+app.use('/images', express.static('Public/Images'));
+
 app.use(cors({
     origin: "http://localhost:5173",  // Allow requests from React app
     methods: ["GET", "POST", "PUT"],  
