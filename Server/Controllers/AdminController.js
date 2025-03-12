@@ -124,8 +124,8 @@ export const getSumSalary=(req,res)=>{
 export const getAllAdmin=(req,res)=>{
   const sql='SELECT * FROM admin';
   con.query(sql,(error,result)=>{
-    if(error) res.status(200).json({error:"Error is running"});
-    console.log(result);
-    res.status(200).json(result);
+    if(error) res.status(200).json({status:false,error:"Error is running"});
+    //console.log(result[0]);
+    res.status(200).json({status:true,result});
   })
 }
