@@ -90,3 +90,42 @@ export const getCategories = (req, res) => {
     return res.status(200).json({ success: true,  result });
   });
 };
+
+
+//admin count
+export const getAdminCount=(req,res)=>{
+  const sql='SELECT COUNT(id) AS count FROM admin';
+  con.query(sql,(error,result)=>{
+    if(error) return res.status(500).json({error:"Error in running"});
+    return res.json({adimcount:result[0].count});
+  })
+}
+
+//admin count
+export const getEmployeeCount=(req,res)=>{
+  const sql='SELECT COUNT(id) AS count FROM employee';
+  con.query(sql,(error,result)=>{
+    if(error) return res.status(500).json({error:"Error in running"});
+    return res.status(200).json({employeecount:result[0].count});
+  })
+}
+
+//salary sum
+export const getSumSalary=(req,res)=>{
+
+  const sql='SELECT SUM(salary) AS sum FROM employee';
+  con.query(sql,(error,result)=>{
+    if(error) return res.status(500).json({error:"Error in running"});
+   // console.log(result);
+    return res.status(200).json({sumsalary:result[0].sum})
+  })
+}
+
+export const getAllAdmin=(req,res)=>{
+  const sql='SELECT * FROM admin';
+  con.query(sql,(error,result)=>{
+    if(error) res.status(200).json({error:"Error is running"});
+    console.log(result);
+    res.status(200).json(result);
+  })
+}
