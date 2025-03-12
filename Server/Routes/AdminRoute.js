@@ -11,7 +11,7 @@ router.get('/get_category',getCategories)
 router.post('/addemployee',upload.single('image'),addEmployee);
 router.get('/get_employee',getEmployee);
 router.get('/get_employee/:id',getEmployeeById);
-router.put('/edit_employee/:id',upload.single('image'),editEmployee);
+router.put('/edit_employee/:id',editEmployee);
 router.get('/delete_employee/:id',deleteEmployee);
 
 

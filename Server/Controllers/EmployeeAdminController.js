@@ -169,10 +169,10 @@ export const editEmployee=(req,res)=>{
   const values=[
     req.body.name,
     req.body.email,
-    req.body.address,
     req.body.salary,
-     imageFilename, // Use new file if uploaded, otherwise keep the old one
+    req.body.address,
     req.body.category_id,
+     imageFilename, // Use new file if uploaded, otherwise keep the old one
     id,
   ]
   con.query(sql,values,(err,result)=>{
