@@ -1,10 +1,23 @@
 import React, { useEffect } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
 
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
+const handleLogout = () => {
+  axios.get("http://localhost:3000/auth/adminlogout", { withCredentials: true }) // Ensure cookies are sent
+    .then((result) => {
+      console.log(result);
+      navigate("/adminlogin"); // Redirect to login page
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
     return (
       <div className="container-fluid">
         <div className="row flex-nowrap">
@@ -31,9 +44,10 @@ const Dashboard = () => {
                     <i className="fs-4 bi-person"></i> <span className="ms-1 d-none d-sm-inline">Profile</span></Link>
                 </li>
                 <li>
-                  <a href="#" className="nav-link px-0 align-middle text-white">
-                    <i className="fs-4 bi-power"></i> <span className="ms-1 d-none d-sm-inline">Logout</span></a>
-                </li>
+                      <button className="btn btn-link nav-link text-white px-0 align-middle" onClick={handleLogout}>
+                        <i className="fs-4 bi-power"></i> <span className="ms-1 d-none d-sm-inline">Logout</span>
+                      </button>
+                    </li>
               </ul>
             </div>
           </div>

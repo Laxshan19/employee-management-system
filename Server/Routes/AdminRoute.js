@@ -1,10 +1,11 @@
 import express from "express";
-import { adminLogin,addCategory,getCategories, getAdminCount,getEmployeeCount, getSumSalary, getAllAdmin } from "../Controllers/AdminController.js";
+import { adminLogin,addCategory,getCategories, getAdminCount,getEmployeeCount, getSumSalary, getAllAdmin, adminLogout } from "../Controllers/AdminController.js";
 import { addEmployee,editEmployee,getEmployee, getEmployeeById, upload,deleteEmployee } from "../Controllers/EmployeeAdminController.js";
 
 const router=express.Router();
 
 router.post('/adminlogin',adminLogin)
+router.get('/adminlogout',adminLogout)
 router.post('/add_category',addCategory)
 router.get('/get_category',getCategories)
 

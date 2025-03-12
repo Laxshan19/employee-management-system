@@ -45,6 +45,10 @@ export const adminLogin=(req,res)=>{
    } 
 }
 
+export const adminLogout = (req, res) => {
+  res.clearCookie("token", { path: "/" }); 
+  return res.status(200).json({ success: true, message: "Logout successful" });
+};
 
 export const addCategory = (req, res) => {
   // 1. Extract data properly

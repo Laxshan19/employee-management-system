@@ -7,10 +7,12 @@ const app = express();
 app.use('/images', express.static('Public/Images'));
 
 app.use(cors({
-    origin: "http://localhost:5173",  // Allow requests from React app
-    methods: ["GET", "POST", "PUT"],  
-    credentials: true  // Allow cookies and authentication headers
+    origin: "http://localhost:5173",  // React app URL
+    methods: ["GET", "POST", "PUT", "DELETE"],  
+    credentials: true,  // Allow cookies, sessions, JWT, etc.
+    allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
 
 app.use(express.json());
 app.use('/auth', adminRouter);
