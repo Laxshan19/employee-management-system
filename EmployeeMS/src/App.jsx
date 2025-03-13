@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import Login from './Components/Login';
+import AdminLogin from './Components/AdminLogin';
 import Dashboard from './Components/Dashboard';
 import Home from './Components/Home';
 import Employee from './Components/Employee';
@@ -10,7 +10,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AddCategory from './Components/AddCategory';
 import AddEmployee from './Components/AddEmployee';
 import EditEmployee from './Components/EditEmployee';
-
+import Start from './Components/start';
+import EmployeeLogin from './Components/EmployeeLogin';
 
 
 
@@ -19,7 +20,9 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>
-    <Route path="/adminlogin" element={<Login />} />
+      <Route path='/start' element={<Start/>}></Route>
+      <Route path="/adminlogin" element={<AdminLogin />} />
+      <Route path="/employeelogin" element={<EmployeeLogin />} />
       <Route path='/dashboard' element={<Dashboard/>}>
          <Route path='' element={<Home/>}></Route>
          <Route path='employee' element={<Employee/>}></Route>
@@ -29,7 +32,6 @@ function App() {
          <Route path='add_employee' element={<AddEmployee/>}></Route>
          <Route path='edit_employee/:id' element={<EditEmployee/>}></Route>
       </Route>
-
     </Routes>
     </BrowserRouter>
   )

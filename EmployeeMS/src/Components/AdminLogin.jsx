@@ -4,7 +4,7 @@ import './style.css';
 import {useNavigate} from 'react-router-dom';
 
 
-const Login = () => {
+const AdminLogin = () => {
     const [values, setValues] = useState({
         email: '',
         password: '',
@@ -60,4 +60,4 @@ const navigate=useNavigate();
     );
 };
 
-export default Login;
+export default AdminLogin;
