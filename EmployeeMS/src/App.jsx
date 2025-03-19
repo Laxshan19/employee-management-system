@@ -12,6 +12,8 @@ import AddEmployee from './Components/AddEmployee';
 import EditEmployee from './Components/EditEmployee';
 import Start from './Components/start';
 import EmployeeLogin from './Components/EmployeeLogin';
+import EmployeeDashboard from './Components/employee/EmployeeDashboard';
+import EmployeeHome from './Components/employee/EmployeeHome';
 
 
 
@@ -31,6 +33,9 @@ function App() {
          <Route path='add_category' element={<AddCategory/>}></Route>
          <Route path='add_employee' element={<AddEmployee/>}></Route>
          <Route path='edit_employee/:id' element={<EditEmployee/>}></Route>
+      </Route>
+      <Route path='/employeedashboard' element={<EmployeeDashboard/>}>
+          <Route path='' element={<EmployeeHome/>}></Route>
       </Route>
     </Routes>
     </BrowserRouter>
