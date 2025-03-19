@@ -23,12 +23,4 @@ router.get('/get_all_admin',getAllAdmin);
 
 
 
-
-
-
-
-
-
-
-
 export {router as adminRouter}
